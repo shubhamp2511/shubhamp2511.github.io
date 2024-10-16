@@ -53,13 +53,25 @@ public class StringCalculatorTest {
         try {
             stringCalculator.add("-1,2");
         } catch (IllegalArgumentException e) {
-            assertEquals(e.getMessage(), "Negatives not allowed: -1");
+            assertEquals(e.getMessage(), "Negatives numbers not allowed: -1");
         }
         try {
             stringCalculator.add("1,-2,3,-5");
         } catch (IllegalArgumentException e) {
-            assertEquals(e.getMessage(), "Negatives not allowed: -2,-5");
+            assertEquals(e.getMessage(), "Negatives numbers not allowed: -2,-5");
         }
+    }
+    
+    @Test
+    @DisplayName("Test Over Thousand")
+    public void testOverThousand() {
+        assertEquals(10, stringCalculator.add("1000,10"));
+    }
+
+    @Test
+    @DisplayName("Test Other Delimiter")
+    public void testOtherDelimiter() {
+        assertEquals(3, stringCalculator.add("//;\n1;2"));
     }
 
 }
