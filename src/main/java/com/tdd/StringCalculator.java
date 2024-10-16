@@ -31,11 +31,22 @@ public class StringCalculator {
 
     private int sum(String[] numbers) {
         int total = 0;
-
+        StringBuilder negativeString = new StringBuilder();
+        
         for (String number : numbers) {
+        	if (convertToInt(number) < 0) {
+                if (negativeString.toString().equals(""))
+                    negativeString = new StringBuilder(number);
+                else
+                    negativeString.append(",").append(number);
+            }
             if (convertToInt(number) < 1000)
                 total += convertToInt(number);
         }
+        if (!negativeString.toString().equals("")) {
+            throw new IllegalArgumentException("Negatives numbers not allowed: " + negativeString);
+        }
+
         return total;
     }
 }
